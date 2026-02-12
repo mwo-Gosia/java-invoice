@@ -16,6 +16,12 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
+        if (product == null) {
+            throw new IllegalArgumentException("Produkt nie może być nullem");
+        }
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Ilość musi być większa od zera");
+        }
         this.products.put(product, quantity);
     }
     private Map<Product, Integer> products = new HashMap<>();
