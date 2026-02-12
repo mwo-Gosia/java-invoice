@@ -36,7 +36,14 @@ public class Invoice {
     }
 
     public BigDecimal getGrossValue() {
-        BigDecimal value = BigDecimal.ZERO;
-        return value;
+        BigDecimal totalGross = BigDecimal.ZERO;
+
+        for (Product product : this.products.keySet()) {
+            Integer quantity = this.products.get(product);
+            BigDecimal priceWithTax = product.getPriceWithTax();
+            BigDecimal lineTotal = priceWithTax.multiply(BigDecimal.valueOf(quantity));
+            totalGross = totalGross.add(lineTotal);
+        }
+        return totalGross;
     }
 }
