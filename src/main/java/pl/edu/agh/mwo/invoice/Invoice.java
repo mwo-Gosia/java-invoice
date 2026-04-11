@@ -41,4 +41,14 @@ public class Invoice {
         }
         return totalGross;
     }
+    
+    private int number;
+
+    public Invoice() {
+        this.number = NUMBER += 1;
+    }
+
+    public int getNumber() {
+        return number;
+    }
 }
