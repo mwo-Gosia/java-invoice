@@ -7,6 +7,8 @@ import java.util.Map;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+    private static int nextNumber = 1;
+    private int number;
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public void addProduct(Product product) {
@@ -41,11 +43,9 @@ public class Invoice {
         }
         return totalGross;
     }
-    
-    private int number;
 
     public Invoice() {
-        this.number = NUMBER += 1;
+        this.number = nextNumber++;
     }
 
     public int getNumber() {

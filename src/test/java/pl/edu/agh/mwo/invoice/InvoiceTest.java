@@ -125,4 +125,11 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+    @Test
+    public void testInvoiceHasUniqueNextNumber() {
+        Invoice invoice1 = new Invoice();
+        Invoice invoice2 = new Invoice();
+        Assert.assertEquals(invoice1.getNumber() + 1, invoice2.getNumber());
+    }
 }
