@@ -22,8 +22,7 @@ public class Invoice {
         if (products.containsKey(product)) {
             Integer currentQuantity = products.get(product);
             products.put(product, currentQuantity + quantity);
-        }
-        else {
+        } else {
             products.put(product, quantity);
         }
     }
