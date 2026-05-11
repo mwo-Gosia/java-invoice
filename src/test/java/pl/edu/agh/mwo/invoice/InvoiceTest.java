@@ -8,10 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pl.edu.agh.mwo.invoice.Invoice;
-import pl.edu.agh.mwo.invoice.product.DairyProduct;
-import pl.edu.agh.mwo.invoice.product.OtherProduct;
-import pl.edu.agh.mwo.invoice.product.Product;
-import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
+import pl.edu.agh.mwo.invoice.product.*;
 
 public class InvoiceTest {
     private Invoice invoice;
@@ -166,6 +163,20 @@ public class InvoiceTest {
         Assert.assertThat(new BigDecimal("15"), Matchers.comparesEqualTo(invoice.getGrossTotal()));
 
         Assert.assertTrue(invoice.getAsString().contains("Liczba pozycji: 1"));
+    }
+
+    @Test
+    public void testBottleOfWineHasExcise() {
+        // Cena netto 100, podatek 23% (23 PLN) + akcyza 5.56 PLN = 128.56 PLN
+        Product wine = new BottleOfWine("Wino", new BigDecimal("100"));
+        Assert.assertThat(new BigDecimal("128.56"), Matchers.comparesEqualTo(wine.getPriceWithTax()));
+    }
+
+    @Test
+    public void testFuelCanisterHasExcise() {
+        // Cena netto 50, podatek 23% (11.50 PLN) + akcyza 5.56 PLN = 67.06 PLN
+        Product fuel = new FuelCanister("Benzyna", new BigDecimal("50"));
+        Assert.assertThat(new BigDecimal("67.06"), Matchers.comparesEqualTo(fuel.getPriceWithTax()));
     }
 
 }
