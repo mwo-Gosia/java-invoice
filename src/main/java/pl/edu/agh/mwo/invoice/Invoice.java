@@ -51,4 +51,23 @@ public class Invoice {
     public int getNumber() {
         return number;
     }
+
+    public String getAsString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Faktura nr ").append(this.number).append("\n");
+
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            sb.append(product.getName())
+                    .append(" - ilość: ").append(quantity)
+                    .append(", cena: ").append(product.getPrice())
+                    .append("\n");
+        }
+
+        sb.append("Liczba pozycji: ").append(products.size());
+        return sb.toString();
+    }
+
+
 }

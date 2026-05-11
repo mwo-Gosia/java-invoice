@@ -132,4 +132,27 @@ public class InvoiceTest {
         Invoice invoice2 = new Invoice();
         Assert.assertEquals(invoice1.getNumber() + 1, invoice2.getNumber());
     }
+
+    @Test
+    public void testInvoiceHasProperFormattedString() {
+        Product chleb = new TaxFreeProduct("Chleb", new BigDecimal("5"));
+        Product ser = new DairyProduct("Ser", new BigDecimal("10"));
+
+        invoice.addProduct(chleb, 2);
+        invoice.addProduct(ser, 1);
+
+        String invoiceString = invoice.getAsString();
+
+        Assert.assertTrue(invoiceString.contains("Faktura nr " + invoice.getNumber()));
+
+        Assert.assertTrue(invoiceString.contains("Chleb"));
+        Assert.assertTrue(invoiceString.contains("2"));
+        Assert.assertTrue(invoiceString.contains("5"));
+
+        Assert.assertTrue(invoiceString.contains("Ser"));
+        Assert.assertTrue(invoiceString.contains("1"));
+        Assert.assertTrue(invoiceString.contains("10"));
+
+        Assert.assertTrue(invoiceString.contains("Liczba pozycji: 2"));
+    }
 }
