@@ -155,4 +155,17 @@ public class InvoiceTest {
 
         Assert.assertTrue(invoiceString.contains("Liczba pozycji: 2"));
     }
+
+    @Test
+    public void testAddDuplicateIncreasesQuantity() {
+        Product chleb = new TaxFreeProduct("Chleb", new BigDecimal("5"));
+
+        invoice.addProduct(chleb);
+        invoice.addProduct(chleb, 2);
+
+        Assert.assertThat(new BigDecimal("15"), Matchers.comparesEqualTo(invoice.getGrossTotal()));
+
+        Assert.assertTrue(invoice.getAsString().contains("Liczba pozycji: 1"));
+    }
+
 }
